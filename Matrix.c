@@ -3,7 +3,8 @@
 
 Matrixf* malloc_Matrixf(unsigned int r, unsigned int c) {
     // Allocate memory for the matrix
-    Matrixf* new_mat = (Matrixf*) malloc(sizeof(Matrixf) + r * c * sizeof(float));
+    Matrixf* new_mat = (Matrixf*) malloc(sizeof(Matrixf));
+    new_mat->data = (float*) malloc(sizeof(float) * r * c);
 
     // Assign the rows and columns
     new_mat->rows = r;
@@ -20,7 +21,7 @@ Matrixf* malloc_Matrixf(unsigned int r, unsigned int c) {
 }
 
 void free_Matrixf(Matrixf* mat) {
-    // Freeing is easy since the data is a float[] not a float*
+    free(mat->data);
     free(mat);
 
     return;
