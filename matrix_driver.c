@@ -5,10 +5,10 @@ int main(int argc, char** argv) {
     Matrixf* mem_safe_mat = malloc_Matrixf(2, 2);
     free_Matrixf(mem_safe_mat);
 
-    unsigned int lhs_rows = 2;
-    unsigned int lhs_columns = 3;
-    unsigned int rhs_rows = 3;
-    unsigned int rhs_columns = 1;
+    unsigned int lhs_rows = 5;
+    unsigned int lhs_columns = 5;
+    unsigned int rhs_rows = 5;
+    unsigned int rhs_columns = 5;
 
     Matrixf* lhs = malloc_Matrixf(lhs_rows, lhs_columns);
     for (unsigned int i = 0; i < lhs_rows; ++i) {
