@@ -4,20 +4,24 @@
 
 Matrixf* malloc_Matrixf(unsigned int r, unsigned int c) {
     // Allocate memory for the matrix
-    Matrixf* new_mat = (Matrixf*) calloc(1, sizeof(Matrixf));
-    new_mat->data = (float*) calloc(r * c, sizeof(float));
+    Matrixf* new_mat = (Matrixf*) malloc(sizeof(Matrixf) + sizeof(float) * r * c);
 
     // Assign the rows and columns
     new_mat->rows = r;
     new_mat->columns = c;
 
+    // Initialize the data to 0
+    for (unsigned int i = 0; i < r; ++i) {
+        for (unsigned int j = 0; j < c; ++j) {
+            new_mat->data[i] = 0;
+        }
+    }
+
     return new_mat;
 }
 
 void free_Matrixf(Matrixf* mat) {
-    free(mat->data);
     free(mat);
-
     return;
 }
 

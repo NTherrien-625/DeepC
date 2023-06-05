@@ -4,7 +4,7 @@
 typedef struct Matrixf {
     unsigned int rows;
     unsigned int columns;
-    float* data;
+    float data[];
 } Matrixf;
 
 Matrixf* malloc_Matrixf(unsigned int r, unsigned int c);
