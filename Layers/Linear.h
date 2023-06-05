@@ -13,4 +13,6 @@ Linear* malloc_Linear(unsigned int in, unsigned int out);
 
 void free_Linear(Linear* L);
 
+Matrixf* forward_Linear(Linear* L, Matrixf* x);
+
 #endif
