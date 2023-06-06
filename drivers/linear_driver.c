@@ -1,4 +1,4 @@
-#include "Layers/Linear.h"
+#include "../Layers/Linear.h"
 
 int main(int argc, char** argv) {
     Linear* mem_safe_layer = malloc_Linear(3, 256);

@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "Activation/relu.h"
-#include "Matrix.h"
+#include "../Activation/relu.h"
+#include "../Matrix.h"
 
 int main(int argc, char** argv) {
     unsigned int rows = 2;

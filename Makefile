@@ -1,8 +1,8 @@
 Matrix.o: Matrix.c
 	gcc -c Matrix.c
 
-matrix_driver.o: matrix_driver.c
-	gcc -c matrix_driver.c
+matrix_driver.o: drivers/matrix_driver.c
+	gcc -c drivers/matrix_driver.c
 
 matrix_driver: Matrix.o matrix_driver.o
 	gcc Matrix.o matrix_driver.o -o matrix_driver
@@ -10,8 +10,8 @@ matrix_driver: Matrix.o matrix_driver.o
 Linear.o: Layers/Linear.c
 	gcc -c Layers/Linear.c
 
-linear_driver.o: linear_driver.c
-	gcc -c linear_driver.c
+linear_driver.o: drivers/linear_driver.c
+	gcc -c drivers/linear_driver.c
 
 linear_driver: Matrix.o Linear.o linear_driver.o
 	gcc Matrix.o Linear.o linear_driver.o -o linear_driver
@@ -19,8 +19,8 @@ linear_driver: Matrix.o Linear.o linear_driver.o
 relu.o: Activation/relu.c
 	gcc -c Activation/relu.c
 
-relu_driver.o: relu_driver.c
-	gcc -c relu_driver.c
+relu_driver.o: drivers/relu_driver.c
+	gcc -c drivers/relu_driver.c
 
 relu_driver: Matrix.o relu.o relu_driver.o
 	gcc Matrix.o relu.o relu_driver.o -o relu_driver
