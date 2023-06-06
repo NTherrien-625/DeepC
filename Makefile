@@ -16,7 +16,17 @@ linear_driver.o: linear_driver.c
 linear_driver: Matrix.o Linear.o linear_driver.o
 	gcc Matrix.o Linear.o linear_driver.o -o linear_driver
 
+relu.o: Activation/relu.c
+	gcc -c Activation/relu.c
+
+relu_driver.o: relu_driver.c
+	gcc -c relu_driver.c
+
+relu_driver: Matrix.o relu.o relu_driver.o
+	gcc Matrix.o relu.o relu_driver.o -o relu_driver
+
 clean:
 	rm -f *.o
 	rm -f matrix_driver
 	rm -f linear_driver
+	rm -f relu_driver
