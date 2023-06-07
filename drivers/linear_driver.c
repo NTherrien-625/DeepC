@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "../Layers/Linear.h"
 
 int main(int argc, char** argv) {
@@ -11,6 +12,11 @@ int main(int argc, char** argv) {
     free_Linear(forward_layer);
     free_Matrixf(x);
     free_Matrixf(y);
+
+    Linear* pointer_test = malloc_Linear(2, 2);
+    fprintf(stdout, "Pointer to the Linear layer = %p\n", pointer_test);
+    fprintf(stdout, "Pointer to the base of the Linear layer = %p\n", &(pointer_test->base));
+    free_Linear(pointer_test);
 
     return 0;
 }
