@@ -1,8 +1,14 @@
 #ifndef LAYER_H
 #define LAYER_H
 
+#include "../Matrix.h"
+
 typedef struct Layer {
-    // Empty struct, used as a base for all other layers
+    // The forward pass of the Layer
+    Matrixf* (*forward)(struct Layer, Matrixf*);
+
+    // The free of the layer
+    void (*free_Layer)(struct Layer);
 } Layer;
 
 #endif

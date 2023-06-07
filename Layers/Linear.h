@@ -5,7 +5,7 @@
 #include "Layer.h"
 
 typedef struct Linear {
-    Layer base;
+    Layer* base;
     
     unsigned int input_dim;
     unsigned int output_dim;
