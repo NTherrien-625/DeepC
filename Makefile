@@ -25,8 +25,18 @@ relu_driver.o: drivers/relu_driver.c
 relu_driver: Matrix.o relu.o relu_driver.o
 	gcc Matrix.o relu.o relu_driver.o -o relu_driver
 
+Model.o: Model.c
+	gcc -c Model.c
+
+model_driver.o: drivers/model_driver.c
+	gcc -c drivers/model_driver.c
+
+model_driver: Model.o model_driver.o
+	gcc Model.o model_driver.o -o model_driver
+
 clean:
 	rm -f *.o
 	rm -f matrix_driver
 	rm -f linear_driver
 	rm -f relu_driver
+	rm -f model_driver
