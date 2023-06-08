@@ -16,8 +16,8 @@ typedef struct Linear {
 
 Linear* malloc_Linear(unsigned int in, unsigned int out);
 
-void free_Linear(void* L);
+void free_Linear(Layer* L);
 
-Matrixf* forward_Linear(void* L, Matrixf* x);
+Matrixf* forward_Linear(Layer* L, Matrixf* x);
 
 #endif

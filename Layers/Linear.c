@@ -9,9 +9,10 @@ Linear* malloc_Linear(unsigned int in, unsigned int out) {
     new_layer->weights = malloc_Matrixf(in, out);
     new_layer->base = (Layer*) malloc(sizeof(Layer));
 
-    // Assign the forward pass and free functions to the base layers
+    // Assign the base variables
     new_layer->base->forward = forward_Linear;
     new_layer->base->free_Layer = free_Linear;
+    new_layer->base->layer = new_layer;
 
     // Set the input and output dimension
     new_layer->input_dim = in;
@@ -20,9 +21,9 @@ Linear* malloc_Linear(unsigned int in, unsigned int out) {
     return new_layer;
 }
 
-void free_Linear(void* L) {
-    // Re-cast the parameter as a Linear*
-    Linear* linear = (Linear*) (L);
+void free_Linear(Layer* L) {
+    // Get the address of the specialized layer
+    Linear* linear = L->layer;
 
     // Free
     free_Matrixf(linear->weights);
@@ -32,9 +33,9 @@ void free_Linear(void* L) {
     return;
 }
 
-Matrixf* forward_Linear(void* L, Matrixf* x) {
-    // Re-cast the parameter as a Linear*
-    Linear* linear = (Linear*) (L);
+Matrixf* forward_Linear(Layer* L, Matrixf* x) {
+    // Get the address of the specialized layer
+    Linear* linear = L->layer;
 
     // Check if the dimensions are compatible
     if ((x->columns != linear->input_dim) && (x->rows != 1)) {
