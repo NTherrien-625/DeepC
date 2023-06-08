@@ -10,7 +10,7 @@ Linear* malloc_Linear(unsigned int in, unsigned int out) {
     new_layer->base = (Layer*) malloc(sizeof(Layer));
 
     // Assign the forward pass and free functions to the base layers
-    new_layer->base->forward = NULL;
+    new_layer->base->forward = forward_Linear;
     new_layer->base->free_Layer = free_Linear;
 
     // Set the input and output dimension
@@ -30,12 +30,14 @@ void free_Linear(void* L) {
     return;
 }
 
-Matrixf* forward_Linear(Linear* L, Matrixf* x) {
-    if ((x->columns != L->input_dim) && (x->rows != 1)) {
+Matrixf* forward_Linear(void* L, Matrixf* x) {
+    Linear* linear = (Linear*) (L);
+
+    if ((x->columns != linear->input_dim) && (x->rows != 1)) {
         return NULL;
     }
 
-    Matrixf* forward_mat = mul_Matrixf(x, L->weights);
+    Matrixf* forward_mat = mul_Matrixf(x, linear->weights);
 
     return forward_mat;
 }

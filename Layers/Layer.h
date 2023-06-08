@@ -5,7 +5,7 @@
 
 typedef struct Layer {
     // The forward pass of the Layer
-    Matrixf* (*forward)(struct Layer, Matrixf*);
+    Matrixf* (*forward)(void*, Matrixf*);
 
     // The free of the layer
     void (*free_Layer)(void*);

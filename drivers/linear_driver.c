@@ -8,7 +8,7 @@ int main(int argc, char** argv) {
 
     Linear* forward_layer = malloc_Linear(3, 256);
     Matrixf* x = malloc_Matrixf(1, 256);
-    Matrixf* y = forward_Linear(forward_layer, x);
+    Matrixf* y = forward_layer->base->forward(forward_layer, x);
 
     free_Linear(forward_layer);
     free_Matrixf(x);
