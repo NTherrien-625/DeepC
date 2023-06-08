@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "../Layers/Linear.h"
 
 int main(int argc, char** argv) {
     Linear* mem_safe_layer = malloc_Linear(3, 256);
-    free_Linear(mem_safe_layer);
+    mem_safe_layer->base->free_Layer(mem_safe_layer);
 
     Linear* forward_layer = malloc_Linear(3, 256);
     Matrixf* x = malloc_Matrixf(1, 256);
@@ -13,10 +14,8 @@ int main(int argc, char** argv) {
     free_Matrixf(x);
     free_Matrixf(y);
 
-    Linear* pointer_test = malloc_Linear(2, 2);
-    fprintf(stdout, "Pointer to the Linear layer = %p\n", pointer_test);
-    fprintf(stdout, "Pointer to the base of the Linear layer = %p\n", &(pointer_test->base));
-    free_Linear(pointer_test);
+    Linear* pointer_test = malloc_Linear(10, 10);
+    pointer_test->base->free_Layer(pointer_test);
 
     return 0;
 }

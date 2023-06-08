@@ -5,16 +5,16 @@
 #include "Layer.h"
 
 typedef struct Linear {
-    Layer* base;
-    
     unsigned int input_dim;
     unsigned int output_dim;
     Matrixf* weights;
+
+    Layer* base;
 } Linear;
 
 Linear* malloc_Linear(unsigned int in, unsigned int out);
 
-void free_Linear(Linear* L);
+void free_Linear(void* L);
 
 Matrixf* forward_Linear(Linear* L, Matrixf* x);
 

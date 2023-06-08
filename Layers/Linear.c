@@ -6,25 +6,26 @@
 Linear* malloc_Linear(unsigned int in, unsigned int out) {
     // Allocate memory for the layer
     Linear* new_layer = (Linear*) malloc(sizeof(Linear));
-    new_layer->base = (Layer*) malloc(sizeof(Layer));
     new_layer->weights = malloc_Matrixf(in, out);
+    new_layer->base = (Layer*) malloc(sizeof(Layer));
 
     // Assign the forward pass and free functions to the base layers
     new_layer->base->forward = NULL;
-    new_layer->base->free_Layer = NULL;
+    new_layer->base->free_Layer = free_Linear;
 
-    // Set the input and output dimensions
+    // Set the input and output dimension
     new_layer->input_dim = in;
     new_layer->output_dim = out;
 
     return new_layer;
 }
 
-void free_Linear(Linear* L) {
-    free(L->base);
-    free_Matrixf(L->weights);
-    free(L);
-    L = NULL;
+void free_Linear(void* L) {
+    Linear* linear = (Linear*) (L);
+
+    free_Matrixf(linear->weights);
+    free(linear->base);
+    free(linear);
 
     return;
 }

@@ -8,7 +8,7 @@ typedef struct Layer {
     Matrixf* (*forward)(struct Layer, Matrixf*);
 
     // The free of the layer
-    void (*free_Layer)(struct Layer);
+    void (*free_Layer)(void*);
 } Layer;
 
 #endif
