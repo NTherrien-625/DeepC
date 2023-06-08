@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "Matrix.h"
 
 Matrixf* malloc_Matrixf(unsigned int r, unsigned int c) {
@@ -13,7 +12,7 @@ Matrixf* malloc_Matrixf(unsigned int r, unsigned int c) {
     // Initialize the data to 0
     for (unsigned int i = 0; i < r; ++i) {
         for (unsigned int j = 0; j < c; ++j) {
-            new_mat->data[i] = 0;
+            new_mat->data[i * c + j] = 0;
         }
     }
 
