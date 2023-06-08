@@ -21,8 +21,10 @@ Linear* malloc_Linear(unsigned int in, unsigned int out) {
 }
 
 void free_Linear(void* L) {
+    // Re-cast the parameter as a Linear*
     Linear* linear = (Linear*) (L);
 
+    // Free
     free_Matrixf(linear->weights);
     free(linear->base);
     free(linear);
@@ -31,12 +33,15 @@ void free_Linear(void* L) {
 }
 
 Matrixf* forward_Linear(void* L, Matrixf* x) {
+    // Re-cast the parameter as a Linear*
     Linear* linear = (Linear*) (L);
 
+    // Check if the dimensions are compatible
     if ((x->columns != linear->input_dim) && (x->rows != 1)) {
         return NULL;
     }
 
+    // Forward pass
     Matrixf* forward_mat = mul_Matrixf(x, linear->weights);
 
     return forward_mat;
