@@ -18,4 +18,6 @@ void insert_Layer(Layer* L, Model* M);
 
 void insert_activation(Matrixf* (*func)(Matrixf*), Model* M);
 
+Matrixf* forward_Model(Matrixf* x, Model* M);
+
 #endif

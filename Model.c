@@ -56,3 +56,30 @@ void insert_activation(Matrixf* (*func)(Matrixf*), Model* M) {
 
     return;
 }
+
+Matrixf* forward_Model(Matrixf* x, Model* M) {
+    // The intermediate matrix that will store the final result
+    Matrixf* return_mat = x;
+
+    // The temporary matrix used for swapping and freeing
+    Matrixf* temp;
+
+    // Go through each layer and activation function
+    for (unsigned int i = 0; i < M->depth; ++i) {
+        // Forward
+        return_mat = M->layers[i]->forward(M->layers[i], return_mat);
+
+        // Store the forward matrix for freeing
+        temp = return_mat;
+
+        // Activate
+        if (M->activation[i] != NULL) {
+            return_mat = M->activation[i](temp);
+        }
+
+        // Free the forward matrix
+        free(temp);
+    }
+
+    return return_mat;
+}
