@@ -5,13 +5,17 @@
 #include "Matrix.h"
 
 typedef struct Model {
-    Layer* layers;
+    Layer** layers;
     Matrixf* (**activation)(Matrixf*);
-    int depth;
+    unsigned int depth;
 } Model;
 
 Model* malloc_Model();
 
 void free_Model(Model* M);
+
+void insert_Layer(Layer* L, Model* M);
+
+void insert_activation(Matrixf* (*func)(Matrixf*), Model* M);
 
 #endif
