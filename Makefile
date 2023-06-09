@@ -25,6 +25,15 @@ relu_driver.o: drivers/relu_driver.c
 relu_driver: Matrix.o relu.o relu_driver.o
 	gcc Matrix.o relu.o relu_driver.o -o relu_driver
 
+leaky_relu.o: Activation/leaky_relu.c
+	gcc -c Activation/leaky_relu.c
+
+leaky_relu_driver.o: drivers/leaky_relu_driver.c
+	gcc -c drivers/leaky_relu_driver.c
+
+leaky_relu_driver: Matrix.o leaky_relu.o leaky_relu_driver.o
+	gcc Matrix.o leaky_relu.o leaky_relu_driver.o -o leaky_relu_driver
+
 Model.o: Model.c
 	gcc -c Model.c
 
@@ -40,3 +49,4 @@ clean:
 	rm -f linear_driver
 	rm -f relu_driver
 	rm -f model_driver
+	rm -f leaky_relu_driver
