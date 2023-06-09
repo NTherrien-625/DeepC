@@ -31,8 +31,8 @@ Model.o: Model.c
 model_driver.o: drivers/model_driver.c
 	gcc -c drivers/model_driver.c
 
-model_driver: Matrix.o Linear.o Model.o model_driver.o
-	gcc Matrix.o Linear.o Model.o model_driver.o -o model_driver
+model_driver: relu.o Matrix.o Linear.o Model.o model_driver.o
+	gcc relu.o Matrix.o Linear.o Model.o model_driver.o -o model_driver
 
 clean:
 	rm -f *.o
