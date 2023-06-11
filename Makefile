@@ -43,6 +43,15 @@ model_driver.o: drivers/model_driver.c
 model_driver: relu.o Matrix.o Linear.o Model.o model_driver.o
 	gcc relu.o Matrix.o Linear.o Model.o model_driver.o -o model_driver
 
+mse.o: Loss/mse.c
+	gcc -c Loss/mse.c
+
+loss_driver.o: drivers/loss_driver.c
+	gcc -c drivers/loss_driver.c
+
+loss_driver: Matrix.o mse.o loss_driver.o
+	gcc Matrix.o mse.o loss_driver.o -o loss_driver
+
 clean:
 	rm -f *.o
 	rm -f matrix_driver
@@ -50,3 +59,4 @@ clean:
 	rm -f relu_driver
 	rm -f model_driver
 	rm -f leaky_relu_driver
+	rm -f loss_driver
