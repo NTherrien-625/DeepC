@@ -40,8 +40,8 @@ Model.o: Model.c
 model_driver.o: drivers/model_driver.c
 	gcc -c drivers/model_driver.c
 
-model_driver: relu.o Matrix.o Linear.o Model.o model_driver.o
-	gcc relu.o Matrix.o Linear.o Model.o model_driver.o -o model_driver
+model_driver: mse.o xor_dataset.o Optimizer.o relu.o Matrix.o Linear.o Model.o model_driver.o
+	gcc mse.o xor_dataset.o Optimizer.o relu.o Matrix.o Linear.o Model.o model_driver.o -o model_driver
 
 mse.o: Loss/mse.c
 	gcc -c Loss/mse.c
@@ -51,6 +51,12 @@ loss_driver.o: drivers/loss_driver.c
 
 loss_driver: Matrix.o mse.o loss_driver.o
 	gcc Matrix.o mse.o loss_driver.o -o loss_driver
+
+Optimizer.o: Optimizer.c
+	gcc -c Optimizer.c
+
+xor_dataset.o: datasets/xor_dataset.c
+	gcc -c datasets/xor_dataset.c
 
 clean:
 	rm -f *.o

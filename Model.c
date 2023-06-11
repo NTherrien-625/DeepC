@@ -83,3 +83,56 @@ Matrixf* forward_Model(Matrixf* x, Model* M) {
 
     return return_mat;
 }
+
+void backward_Model(Matrixf* x, Matrixf* y, Optimizer* O, Model* M) {
+    // The step size for the one sided derivative
+    float STEP_SIZE = 0.0001;
+
+    // The model resulting from gradient descent
+    float** grad_model = (float**) malloc(sizeof(float*) * M->depth);
+
+    // For each parameter in the model
+    for (unsigned int i = 0; i < M->depth; ++i) {
+
+        grad_model[i] = (float*) malloc(sizeof(float) * M->layers[i]->num_weights);
+
+        for (unsigned int j = 0; j < M->layers[i]->num_weights; ++j) {
+            Matrixf* y_hat;
+
+            // Compute the loss of the original weight
+            y_hat = forward_Model(x, M);
+            float loss_orig = O->loss(y, y_hat);
+            free(y_hat);
+
+            // Save the original weight
+            float original_weight = ((Matrixf*) M->layers[i]->weights)->data[j];
+            
+            // Compute the loss of the stepped weight
+            ((Matrixf*) M->layers[i]->weights)->data[j] += STEP_SIZE;
+            y_hat = forward_Model(x, M);
+            float loss_step = O->loss(y, y_hat);
+            free(y_hat);
+
+            // Restore the original weight
+            ((Matrixf*) M->layers[i]->weights)->data[j] = original_weight;
+
+            // Compute the gradient
+            grad_model[i][j] = original_weight - (O->alpha * (loss_step - loss_orig));
+        }
+    }
+
+    // Copy the new model into the actual model
+    for (unsigned int i = 0; i < M->depth; ++i) {
+        for (unsigned int j = 0; j < M->layers[i]->num_weights; ++j) {
+            ((Matrixf*) M->layers[i]->weights)->data[j] = grad_model[i][j];
+        }
+    }
+
+    // Free the extra model
+    for (unsigned int i = 0; i < M->depth; ++i) {
+        free(grad_model[i]);
+    }
+    free(grad_model);
+
+    return;
+}

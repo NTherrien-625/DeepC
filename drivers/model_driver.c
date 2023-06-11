@@ -1,8 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "../Model.h"
 #include "../Layers/Linear.h"
 #include "../Activation/relu.h"
 #include "../Matrix.h"
+#include "../datasets/xor_dataset.h"
+#include "../Optimizer.h"
+#include "../Loss/mse.h"
 
 int main(int argc, char** argv) {
     // Malloc and free test without layers
@@ -59,6 +63,55 @@ int main(int argc, char** argv) {
     free_Matrixf(input_mat);
     free_Matrixf(output_mat);
     free_Model(forward_model);
+
+    // Backwards pass test (try to learn XOR)
+    Model* xor_model = malloc_Model();
+    Linear* input_layer = malloc_Linear(2, 2);
+    Linear* output_layer = malloc_Linear(2, 1);
+    insert_Layer(input_layer->base, xor_model);
+    insert_Layer(output_layer->base, xor_model);
+    insert_activation(relu_Matrixf, xor_model);
+    insert_activation(relu_Matrixf, xor_model);
+    Optimizer* optimizer = malloc_Optimizer(0.01, mse);
+
+    // The training data
+    unsigned int training_instances = 100;
+    Matrixf** data = get_xor_points(training_instances);
+    float* labels = get_xor_labels(training_instances);
+
+    // The training loop
+    unsigned int epochs = 1;
+    float rolling_loss;
+    Matrixf* forward_mat;
+    Matrixf* label_mat = malloc_Matrixf(1, 1);
+    for (unsigned int i = 0; i < epochs; ++i) {
+
+        // Do a forward pass and find the total loss
+        rolling_loss = 0;
+        for (unsigned int j = 0; j < training_instances; ++j) {
+            forward_mat = forward_Model(data[j], xor_model);
+            label_mat->data[0] = labels[j];
+            rolling_loss += optimizer->loss(label_mat, forward_mat);
+            free_Matrixf(forward_mat);
+        }
+
+        fprintf(stdout, "Epoch %u : %f\n", i, rolling_loss);
+
+        // Do a backward pass and adjust the weights
+        for (unsigned int j = 0; j < training_instances; ++j) {
+            label_mat->data[0] = labels[j];
+            backward_Model(data[j], label_mat, optimizer, xor_model);
+        }
+    }
+
+    free_Matrixf(label_mat);
+    free(labels);
+    for (unsigned int i = 0; i < training_instances; ++i) {
+        free_Matrixf(data[i]);
+    }
+    free(data);
+    free_Optimizer(optimizer);
+    free_Model(xor_model);
     
     return 0;
 }
