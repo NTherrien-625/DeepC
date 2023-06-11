@@ -54,9 +54,4 @@ loss_driver: Matrix.o mse.o loss_driver.o
 
 clean:
 	rm -f *.o
-	rm -f matrix_driver
-	rm -f linear_driver
-	rm -f relu_driver
-	rm -f model_driver
-	rm -f leaky_relu_driver
-	rm -f loss_driver
+	rm -f *_driver
