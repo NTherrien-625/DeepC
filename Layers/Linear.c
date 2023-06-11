@@ -6,15 +6,15 @@
 Linear* malloc_Linear(unsigned int in, unsigned int out) {
     // Allocate memory for the layer
     Linear* new_layer = (Linear*) malloc(sizeof(Linear));
-    new_layer->weights = malloc_Matrixf(in, out);
     new_layer->base = (Layer*) malloc(sizeof(Layer));
 
     // Assign the base variables
+    new_layer->base->layer = new_layer;
+    new_layer->base->weights = malloc_Matrixf(in, out);
     new_layer->base->forward = forward_Linear;
     new_layer->base->free_Layer = free_Linear;
-    new_layer->base->layer = new_layer;
 
-    // Set the input and output dimension
+    // Assign the specialized variables
     new_layer->input_dim = in;
     new_layer->output_dim = out;
 
@@ -25,10 +25,14 @@ void free_Linear(Layer* L) {
     // Get the address of the specialized layer
     Linear* linear = L->layer;
 
-    // Free
-    free_Matrixf(linear->weights);
+    // Free the base
+    free_Matrixf(linear->base->weights);
     free(linear->base);
+
+    // Free the whole thing
     free(linear);
+
+    linear = NULL;
 
     return;
 }
@@ -43,7 +47,7 @@ Matrixf* forward_Linear(Layer* L, Matrixf* x) {
     }
 
     // Forward pass
-    Matrixf* forward_mat = mul_Matrixf(x, linear->weights);
+    Matrixf* forward_mat = mul_Matrixf(x, linear->base->weights);
 
     return forward_mat;
 }

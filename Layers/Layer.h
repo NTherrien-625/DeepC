@@ -4,14 +4,17 @@
 #include "../Matrix.h"
 
 typedef struct Layer {
-    // The forward pass of the Layer
-    Matrixf* (*forward)(struct Layer*, Matrixf*);
-
-    // The free of the layer
-    void (*free_Layer)(struct Layer*);
-
     // The address of its specialized Layer
     void* layer;
+
+    // The weights of the specialized layer
+    void* weights;
+
+    // The forward pass of the specialized Layer
+    Matrixf* (*forward)(struct Layer*, Matrixf*);
+
+    // The free of the specialized Layer
+    void (*free_Layer)(struct Layer*);
 } Layer;
 
 #endif
