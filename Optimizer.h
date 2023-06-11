@@ -1,4 +1,4 @@
-#include OPTIMIZER_H
+#ifndef OPTIMIZER_H
 #define OPTIMIZER_H
 
 #include "Matrix.h"
