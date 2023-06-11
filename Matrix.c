@@ -9,10 +9,15 @@ Matrixf* malloc_Matrixf(unsigned int r, unsigned int c) {
     new_mat->rows = r;
     new_mat->columns = c;
 
+    // Random initialization
+    srand(0);
+    float min = -1.0;
+    float max = 1.0;
+
     // Initialize the data to 0
     for (unsigned int i = 0; i < r; ++i) {
         for (unsigned int j = 0; j < c; ++j) {
-            new_mat->data[i * c + j] = 0;
+            new_mat->data[i * c + j] = min + ((float)rand() / RAND_MAX) * (max - min);;
         }
     }
 
