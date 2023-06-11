@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <time.h>
-#include "Matrix.h"
+#include "../Matrix.h"
 
 Matrixf** get_xor_points(unsigned int num_points) {
     Matrixf** points = (Matrixf**) malloc(sizeof(Matrixf*) * num_points);
@@ -52,7 +52,7 @@ Matrixf** get_xor_points(unsigned int num_points) {
     return points;
 }
 
-float* get_xor_lables(unsigned int num_points) {
+float* get_xor_labels(unsigned int num_points) {
     float* labels = (float*) malloc(sizeof(float) * num_points);
 
     for (unsigned int i = 0; i < num_points; ++i) {

@@ -5,6 +5,6 @@
 
 Matrixf** get_xor_points(unsigned int num_points);
 
-float* get_xor_lables(unsigned int num_points);
+float* get_xor_labels(unsigned int num_points);
 
 #endif
