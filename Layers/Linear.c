@@ -11,6 +11,7 @@ Linear* malloc_Linear(unsigned int in, unsigned int out) {
     // Assign the base variables
     new_layer->base->layer = new_layer;
     new_layer->base->weights = malloc_Matrixf(in, out);
+    new_layer->base->num_weights = in * out;
     new_layer->base->forward = forward_Linear;
     new_layer->base->free_Layer = free_Linear;
 

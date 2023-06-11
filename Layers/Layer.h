@@ -9,6 +9,7 @@ typedef struct Layer {
 
     // The weights of the specialized layer
     void* weights;
+    unsigned int num_weights;
 
     // The forward pass of the specialized Layer
     Matrixf* (*forward)(struct Layer*, Matrixf*);
