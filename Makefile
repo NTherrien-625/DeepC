@@ -58,6 +58,15 @@ Optimizer.o: Optimizer.c
 xor_dataset.o: datasets/xor_dataset.c
 	gcc -c datasets/xor_dataset.c
 
+Tensor.o: Tensor.c
+	gcc -c Tensor.c
+
+tensor_driver.o: drivers/tensor_driver.c
+	gcc -c drivers/tensor_driver.c
+
+tensor_driver: Tensor.o tensor_driver.o
+	gcc Tensor.o tensor_driver.o -o tensor_driver
+
 clean:
 	rm -f *.o
 	rm -f *_driver
