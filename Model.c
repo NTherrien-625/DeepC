@@ -117,7 +117,7 @@ void backward_Model(Matrixf* x, Matrixf* y, Optimizer* O, Model* M) {
             ((Matrixf*) M->layers[i]->weights)->data[j] = original_weight;
 
             // Compute the gradient
-            grad_model[i][j] = original_weight - (O->alpha * (loss_step - loss_orig));
+            grad_model[i][j] = original_weight - (O->alpha * ((loss_step - loss_orig) / STEP_SIZE));
         }
     }
 
