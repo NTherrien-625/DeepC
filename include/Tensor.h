@@ -14,4 +14,6 @@ Tensord* malloc_Tensord(unsigned int argc, ...);
 
 void free_Tensord(Tensord* T);
 
+Tensord* mul_Tensord_r2(Tensord* lhs, Tensord* rhs);
+
 #endif

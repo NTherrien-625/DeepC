@@ -1,3 +1,5 @@
+#include <assert.h>
+
 #include "../../include/Tensor.h"
 
 Tensord* malloc_Tensord(unsigned int argc, ...) {
@@ -42,4 +44,44 @@ void free_Tensord(Tensord* T) {
     free(T);
     T = NULL;
     
+}
+
+Tensord* mul_Tensord_r2(Tensord* lhs, Tensord* rhs) {
+
+    // Assert the dimensions of the Tensors
+    assert( (lhs->rank == 2) && (rhs->rank == 2) );
+    assert(lhs->dims[1] == rhs->dims[0]);
+
+    // Allocate space for the new Tensor
+    Tensord* new_tensor = malloc_Tensord(2, lhs->dims[0], rhs->dims[1]);
+
+    // Do the Naive algorithm
+    double help_vector[ lhs->dims[1] ];
+    double dot;
+
+    // For each row in the left Tensor
+    for (unsigned int i = 0; i < lhs->dims[0]; ++i) {
+
+        // Cache off the current lhs row
+        for (unsigned int k = 0; k < lhs->dims[1]; ++k) {
+            help_vector[k] = lhs->data[i * lhs->dims[1] + k];
+        }
+
+        // For each column in the right Tensor
+        for (unsigned int j = 0; j < rhs->dims[1]; ++j) {
+
+            // Find the dot product and place it in [i][j]
+            dot = 0;
+            for (unsigned int k = 0; k < rhs->dims[0]; ++k) {
+                dot += ( help_vector[k] * rhs->data[k * rhs->dims[1] + j] ); 
+            }
+            new_tensor->data[i * rhs->dims[1] + j] = dot;
+
+        }
+
+    }
+
+    // We did it
+    return new_tensor;
+
 }
