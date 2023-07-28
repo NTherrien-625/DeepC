@@ -12,4 +12,6 @@ Linear* malloc_Linear(unsigned int in, unsigned int out);
 
 void free_Linear(Layer* L);
 
+Tensord* forward_Linear(Layer* L, Tensord* x);
+
 #endif
