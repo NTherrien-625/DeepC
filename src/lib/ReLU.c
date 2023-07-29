@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "../../include/ReLU.h"
 
 Activation* malloc_ReLU(void) {

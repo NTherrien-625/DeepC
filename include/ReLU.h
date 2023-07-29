@@ -1,5 +1,5 @@
-#ifndef ReLU_H
-#define ReLU_H
+#ifndef RELU_H
+#define RELU_H
 
 #include "Activation.h"
 
