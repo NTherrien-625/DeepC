@@ -1,2 +1,2 @@
-*.o
-*_driver
+*Driver
+obj
