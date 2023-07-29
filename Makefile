@@ -18,6 +18,9 @@ TensorDriver: $(OBJ_DIR)/Tensor.o $(OBJ_DIR)/TensorDriver.o
 LinearDriver: $(OBJ_DIR)/Tensor.o $(OBJ_DIR)/Linear.o $(OBJ_DIR)/LinearDriver.o
 	$(CC) $^ -o $@
 
+ReLUDriver: $(OBJ_DIR)/Tensor.o $(OBJ_DIR)/ReLU.o $(OBJ_DIR)/ReLUDriver.o
+	$(CC) $^ -o $@ -lm
+
 clean:
 	rm -f obj/*.o
 	rm -f *Driver
