@@ -4,7 +4,7 @@
 #include "../../include/Tensor.h"
 #include "../../include/Linear.h"
 
-Linear* malloc_Linear(unsigned int in, unsigned int out) {
+Layer* malloc_Linear(unsigned int in, unsigned int out) {
     
     // Allocate space for the Linear layer
     Linear* new_linear = (Linear*) malloc( sizeof(Linear) );
@@ -22,7 +22,7 @@ Linear* malloc_Linear(unsigned int in, unsigned int out) {
     new_linear->base->forward = forward_Linear;
     new_linear->base->free_Layer = free_Linear;
 
-    return new_linear;
+    return new_linear->base;
 
 }
 

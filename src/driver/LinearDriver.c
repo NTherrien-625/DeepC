@@ -13,20 +13,20 @@ double rand_norm() {
 int main(int argc, char** argv) {
 
     // Malloc and free test
-    Linear* new_linear = malloc_Linear(2, 20);
-    free_Linear(new_linear->base);
+    Layer* new_linear = malloc_Linear(2, 20);
+    new_linear->free_Layer(new_linear);
     
     // Forward pass test
     unsigned int in = 2;
     unsigned int out = 20;
 
-    Linear* f_linear = malloc_Linear(in, out);
+    Layer* f_linear = malloc_Linear(in, out);
 
     Tensord* x = malloc_Tensord(2, 1, in);
 
     for (unsigned int i = 0; i < in; ++i) {
         for (unsigned int j = 0; j < out; ++j) {
-            f_linear->base->weights->data[i * out + j] = rand_norm();
+            f_linear->weights->data[i * out + j] = rand_norm();
         }
     }
 
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    Tensord* f_tensor = f_linear->base->forward(f_linear->base, x);
+    Tensord* f_tensor = f_linear->forward(f_linear, x);
 
     for (unsigned int i = 0; i < 1; ++i) {
         for (unsigned int j = 0; j < out; ++j) {
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 
     free_Tensord(f_tensor);
     free_Tensord(x);
-    free_Linear(f_linear->base);
+    f_linear->free_Layer(f_linear);
 
     return 0;
 }

@@ -8,7 +8,7 @@ typedef struct Linear {
     Layer* base;
 } Linear;
 
-Linear* malloc_Linear(unsigned int in, unsigned int out);
+Layer* malloc_Linear(unsigned int in, unsigned int out);
 
 void free_Linear(Layer* L);
 
