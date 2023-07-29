@@ -21,6 +21,9 @@ LinearDriver: $(OBJ_DIR)/Tensor.o $(OBJ_DIR)/Linear.o $(OBJ_DIR)/LinearDriver.o
 ReLUDriver: $(OBJ_DIR)/Tensor.o $(OBJ_DIR)/ReLU.o $(OBJ_DIR)/ReLUDriver.o
 	$(CC) $^ -o $@ -lm
 
+LeakyReLUDriver: $(OBJ_DIR)/Tensor.o $(OBJ_DIR)/LeakyReLU.o $(OBJ_DIR)/LeakyReLUDriver.o
+	$(CC) $^ -o $@ -lm
+
 clean:
 	rm -f obj/*.o
 	rm -f *Driver
