@@ -4,6 +4,7 @@ Activation* malloc_LeakyReLU(double leak) {
 
     // Allocate space for the LeakyReLU
     LeakyReLU* new_leaky = (LeakyReLU*) malloc( sizeof(LeakyReLU) );
+    new_leaky->leak = leak;
 
     // Allocate space for the base activation and link them up
     new_leaky->base = (Activation*) malloc( sizeof(Activation) );
