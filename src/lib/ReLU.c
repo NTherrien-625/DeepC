@@ -25,7 +25,6 @@ Tensord* activate_ReLU(Activation* A, Tensord* x) {
     relu_tensor->dims = (unsigned int*) malloc ( sizeof(unsigned int) * relu_tensor->rank );
     unsigned int rolling_size = 1;
     for (unsigned int i = 0; i < relu_tensor->rank; ++i) {
-        fprintf(stdout, "%d\n", i);
         relu_tensor->dims[i] = x->dims[i];
         rolling_size *= x->dims[i];
     }
