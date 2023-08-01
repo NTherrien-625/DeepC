@@ -18,4 +18,6 @@ void free_Model(Model* M);
 
 void insert_Layer(Model* M, Layer* L);
 
+void insert_Activation(Model* M, Activation* A);
+
 #endif

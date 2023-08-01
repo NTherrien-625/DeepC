@@ -21,7 +21,9 @@ void free_Model(Model* M) {
 
     // Free all the layers
     for (unsigned int i = 0; i < M->num_layers; ++i) {
-        M->layers[i]->free_Layer(M->layers[i]);
+        if (M->layers[i] != NULL) {
+            M->layers[i]->free_Layer(M->layers[i]);
+        }
     }
     M->num_layers = 0;
 
@@ -30,7 +32,9 @@ void free_Model(Model* M) {
 
     // Free all the activation functions
     for (unsigned int i = 0; i < M->num_activations; ++i) {
-        M->activations[i]->free_Activation(M->activations[i]);
+        if (M->activations[i] != NULL) {
+            M->activations[i]->free_Activation(M->activations[i]);
+        }
     }
     M->num_activations = 0;
 
@@ -53,5 +57,18 @@ void insert_Layer(Model* M, Layer* L) {
     M->layers[M->num_layers - 1] = L;
 
     return;
-    
+
+}
+
+void insert_Activation(Model* M, Activation* A) {
+
+    // Reallocate the activation array to hold space for the new one
+    M->num_activations += 1;
+    M->activations = (Activation**) realloc( M->activations, sizeof(Activation*) * M->num_activations );
+
+    // Insert the new activation
+    M->activations[M->num_activations - 1] = A;
+
+    return;
+
 }
