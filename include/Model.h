@@ -16,4 +16,6 @@ Model* malloc_Model(void);
 
 void free_Model(Model* M);
 
+void insert_Layer(Model* M, Layer* L);
+
 #endif

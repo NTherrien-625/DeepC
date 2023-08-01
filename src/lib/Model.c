@@ -42,3 +42,16 @@ void free_Model(Model* M) {
     M = NULL;
 
 }
+
+void insert_Layer(Model* M, Layer* L) {
+
+    // Reallocate the layer array to hold space for the new one
+    M->num_layers += 1;
+    M->layers = (Layer**) realloc( M->layers, sizeof(Layer*) * M->num_layers );
+
+    // Insert the new layer
+    M->layers[M->num_layers - 1] = L;
+
+    return;
+    
+}
