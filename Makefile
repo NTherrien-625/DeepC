@@ -28,7 +28,7 @@ ReLUDriver: $(OBJ_DIR)/Tensor.o $(OBJ_DIR)/ReLU.o $(OBJ_DIR)/ReLUDriver.o
 LeakyReLUDriver: $(OBJ_DIR)/Tensor.o $(OBJ_DIR)/LeakyReLU.o $(OBJ_DIR)/LeakyReLUDriver.o
 	$(CC) $^ -o $@ -lm
 
-ModelDriver: $(ModelDriver_OBJ) $(OBJ_DIR)/Model.o $(OBJ_DIR)/ModelDriver.o
+ModelDriver: $(ModelDriver_OBJ) $(OBJ_DIR)/ModelDriver.o
 	$(CC) $^ -o $@ -lm
 
 clean:

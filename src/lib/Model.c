@@ -21,9 +21,7 @@ void free_Model(Model* M) {
 
     // Free all the layers
     for (unsigned int i = 0; i < M->num_layers; ++i) {
-        if (M->layers[i] != NULL) {
-            M->layers[i]->free_Layer(M->layers[i]);
-        }
+        M->layers[i]->free_Layer(M->layers[i]);
     }
     M->num_layers = 0;
 

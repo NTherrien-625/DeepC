@@ -23,12 +23,24 @@ int main(int argc, char** argv) {
 
     // Malloc and free model with activations test
     model = malloc_Model();
-
     Activation* relu = malloc_ReLU();
     Activation* leaky = malloc_LeakyReLU(0.01);
 
     insert_Activation(model, relu);
     insert_Activation(model, leaky);
+
+    free_Model(model);
+
+    // Malloc and free actual model
+    model = malloc_Model();
+    linear = malloc_Linear(2, 20);
+    linear_2 = malloc_Linear(20, 1);
+    relu = malloc_ReLU();
+
+    insert_Layer(model, linear);
+    insert_Layer(model, linear_2);
+    insert_Activation(model, relu);
+    insert_Activation(model, NULL);
 
     free_Model(model);
 
