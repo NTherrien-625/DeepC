@@ -34,5 +34,30 @@ int main(int argc, char** argv) {
     free_Tensord(right);
     free_Tensord(mul);
 
+    // Copy "Constructor" Test
+    Tensord* initial = malloc_Tensord(2, m, n);
+
+    fprintf(stdout, "\n");
+    for (unsigned int i = 0; i < m; ++i) {
+        for (unsigned int j = 0; j < n; ++j) {
+            initial->data[i * n + j] = (i + j);
+            fprintf(stdout, "%f\t", initial->data[i * n + j]);
+        }
+        fprintf(stdout, "\n");
+    }
+
+    Tensord* copy = copy_Tensord(initial);
+
+    fprintf(stdout, "\n");
+    for (unsigned int i = 0; i < m; ++i) {
+        for (unsigned int j = 0; j < n; ++j) {
+            fprintf(stdout, "%f\t", copy->data[i * n + j]);
+        }
+        fprintf(stdout, "\n");
+    }
+
+    free_Tensord(initial);
+    free_Tensord(copy);
+
     return 0;
 }

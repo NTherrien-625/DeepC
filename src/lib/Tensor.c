@@ -85,3 +85,27 @@ Tensord* mul_Tensord_r2(Tensord* lhs, Tensord* rhs) {
     return new_tensor;
 
 }
+
+Tensord* copy_Tensord(Tensord* T) {
+
+    // Allocate space for the new tensor
+    Tensord* new_tensor = (Tensord*) malloc( sizeof(Tensord) );
+
+    // Allocate space and initialize the rank and dimensions
+    new_tensor->rank = T->rank;
+    new_tensor->dims = (unsigned int*) malloc( sizeof(unsigned int) * new_tensor->rank );
+    unsigned int rolling_size = 1;
+    for (unsigned int i = 0; i < new_tensor->rank; ++i) {
+        new_tensor->dims[i] = T->dims[i];
+        rolling_size *= new_tensor->dims[i];
+    }
+
+    // Allocate space for and copy over the Tensor data
+    new_tensor->data = (double*) malloc( sizeof(double) * rolling_size );
+    for (unsigned int i = 0; i < rolling_size; ++i) {
+        new_tensor->data[i] = T->data[i];
+    }
+
+    return new_tensor;
+
+}
