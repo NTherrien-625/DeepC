@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <assert.h>
 
 #include "../../include/Model.h"
 
@@ -68,5 +69,41 @@ void insert_Activation(Model* M, Activation* A) {
     M->activations[M->num_activations - 1] = A;
 
     return;
+
+}
+
+Tensord* forward_Model(Model* M, Tensord* x) {
+
+    // Assert that there is a layer for each activation
+    assert( M->num_layers == M->num_activations );
+
+    // x needs to be kept safe, it is a dataset instance, copy x into a temporary tensor
+    Tensord* temp_one = copy_Tensord(x);
+
+    // Another helper pointer
+    Tensord* temp_two;
+
+    // For each layer and activation
+    for (unsigned int i = 0; i < M->num_layers; ++i) {
+        
+        // Pass the data through the layer
+        temp_two = M->layers[i]->forward(M->layers[i], temp_one);
+        free_Tensord(temp_one);
+
+        // Pass the data through the activation
+        if (M->activations[i] != NULL) {
+            temp_one = M->activations[i]->activate(M->activations[i], temp_two);
+        }
+
+        // NULL activation means it just passes through, no fuss
+        else {
+            temp_one = copy_Tensord(temp_two);
+        }
+
+        free_Tensord(temp_two);
+
+    }
+
+    return temp_one;
 
 }

@@ -4,6 +4,7 @@
 #include "../../include/Linear.h"
 #include "../../include/ReLU.h"
 #include "../../include/LeakyReLU.h"
+#include "../../include/Tensor.h"
 
 int main(int argc, char** argv) {
 
@@ -43,6 +44,29 @@ int main(int argc, char** argv) {
     insert_Activation(model, NULL);
 
     free_Model(model);
+
+    // Forward model test
+    unsigned int in_1 = 2;
+    unsigned int out_1 = 20;
+    unsigned int out_2 = 1;
+
+    model = malloc_Model();
+    linear = malloc_Linear(in_1, out_1);
+    linear_2 = malloc_Linear(out_1, out_2);
+    relu = malloc_ReLU();
+
+    insert_Layer(model, linear);
+    insert_Layer(model, linear_2);
+    insert_Activation(model, relu);
+    insert_Activation(model, NULL);
+
+    Tensord* x = malloc_Tensord(2, 1, in_1);
+    
+    Tensord* y = forward_Model(model, x);
+
+    free_Model(model);
+    free_Tensord(x);
+    free_Tensord(y);
 
     return 0;
 }

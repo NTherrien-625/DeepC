@@ -20,4 +20,6 @@ void insert_Layer(Model* M, Layer* L);
 
 void insert_Activation(Model* M, Activation* A);
 
+Tensord* forward_Model(Model* M, Tensord* x);
+
 #endif

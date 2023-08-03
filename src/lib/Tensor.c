@@ -22,8 +22,11 @@ Tensord* malloc_Tensord(unsigned int argc, ...) {
         new_tensor->dims[i - 1] = temp;
     }
 
-    // Allocate space for the data
+    // Allocate space for the data and initialize
     new_tensor->data = (double*) malloc( sizeof(double) * rolling_size );
+    for (unsigned int i = 0; i < rolling_size; ++i) {
+        new_tensor->data[i] = 0;
+    }
     
     return new_tensor;
 
