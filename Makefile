@@ -7,7 +7,7 @@ DRIVER_SRC_DIR := src/driver
 OBJ_DIR := obj
 
 # Dependency Lists
-_ModelDriver_OBJ := Tensor.o ReLU.o LeakyReLU.o Linear.o Model.o
+_ModelDriver_OBJ := Tensor.o ReLU.o LeakyReLU.o Linear.o Loss.o Model.o
 ModelDriver_OBJ := $(patsubst %,$(OBJ_DIR)/%,$(_ModelDriver_OBJ))
 
 $(OBJ_DIR)/%.o: $(LIB_SRC_DIR)/%.c

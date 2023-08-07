@@ -5,15 +5,16 @@
 #include "../../include/ReLU.h"
 #include "../../include/LeakyReLU.h"
 #include "../../include/Tensor.h"
+#include "../../include/Loss.h"
 
 int main(int argc, char** argv) {
 
     // Malloc and free empty model test
-    Model* model = malloc_Model();
+    Model* model = malloc_Model(0.01, mse_loss);
     free_Model(model);
 
     // Malloc and free model with layers test
-    model = malloc_Model();
+    model = malloc_Model(0.01, mse_loss);
     Layer* linear = malloc_Linear(2, 20);
     Layer* linear_2 = malloc_Linear(20, 1);
 
@@ -23,7 +24,7 @@ int main(int argc, char** argv) {
     free_Model(model);
 
     // Malloc and free model with activations test
-    model = malloc_Model();
+    model = malloc_Model(0.01, mse_loss);
     Activation* relu = malloc_ReLU();
     Activation* leaky = malloc_LeakyReLU(0.01);
 
@@ -33,7 +34,7 @@ int main(int argc, char** argv) {
     free_Model(model);
 
     // Malloc and free actual model
-    model = malloc_Model();
+    model = malloc_Model(0.01, mse_loss);
     linear = malloc_Linear(2, 20);
     linear_2 = malloc_Linear(20, 1);
     relu = malloc_ReLU();
@@ -50,7 +51,7 @@ int main(int argc, char** argv) {
     unsigned int out_1 = 20;
     unsigned int out_2 = 1;
 
-    model = malloc_Model();
+    model = malloc_Model(0.01, mse_loss);
     linear = malloc_Linear(in_1, out_1);
     linear_2 = malloc_Linear(out_1, out_2);
     relu = malloc_ReLU();

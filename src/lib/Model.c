@@ -3,7 +3,7 @@
 
 #include "../../include/Model.h"
 
-Model* malloc_Model(void) {
+Model* malloc_Model(double lr, double (*loss)(Tensord*, Tensord*)) {
 
     // Allocate space for the new model
     Model* new_model = (Model*) malloc( sizeof(Model) );
@@ -13,6 +13,10 @@ Model* malloc_Model(void) {
     new_model->activations = NULL;
     new_model->num_layers = 0;
     new_model->num_activations = 0;
+
+    // Assign the optimization members
+    new_model->alpha = lr;
+    new_model->loss = loss;
 
     return new_model;
 

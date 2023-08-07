@@ -5,14 +5,20 @@
 #include "Activation.h"
 
 typedef struct Model {
+
+    // Model members
     Layer** layers;
     Activation** activations;
-
     unsigned int num_layers;
     unsigned int num_activations;
+
+    // Optimization members
+    double alpha;
+    double (*loss)(Tensord*, Tensord*);
+
 } Model;
 
-Model* malloc_Model(void);
+Model* malloc_Model(double lr, double (*loss)(Tensord*, Tensord*));
 
 void free_Model(Model* M);
 
